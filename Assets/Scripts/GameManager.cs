@@ -17,13 +17,13 @@ public class GameManager : MonoBehaviour
 
     private float spawnRate = 1.5f;
     private int score;
-    public float live;
+    public float remainingLives;
  
 
     // Start is called before the first frame update
     void Start()
     {
-        live = 3;
+        remainingLives = 3;
     }
 
     // Update is called once per frame
@@ -41,16 +41,16 @@ public class GameManager : MonoBehaviour
             Instantiate(targets[index]);
         }
     }
-
+    // Handle update score
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
     }
-
+    // Handle game over
     public void GameOver()
     {
-        if (live < 1)
+        if (remainingLives < 1)
         {
             restartButton.gameObject.SetActive(true);
             gameOverText.gameObject.SetActive(true);
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
     public void LiveLose(int liveToDelete)
     {
         liveText.text = "Live: " + live;
-        live -= liveToDelete;
+        remainingLives -= liveToDelete;
     }
 
     public void RestartGame()
